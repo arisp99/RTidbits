@@ -20,7 +20,7 @@ RTidbits
   - [Figures](#figures)
   - [Misc](#misc)
 
-<!-- Code for website -->
+<!-- Code for Website -->
 
 <!-- ```{r, echo = F} -->
 

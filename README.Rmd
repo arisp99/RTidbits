@@ -11,13 +11,12 @@ output:
 #     number_sections: true
 ---
 
-<!-- Code for website -->
+<!-- Code for Website -->
 <!-- ```{r, echo = F} -->
 <!-- htmltools::img(src = knitr::image_uri("logo.png"),  -->
 <!--                alt = 'logo',  -->
 <!--                style = 'position:absolute; top:0; right:0; height:130px; padding:10px;') -->
 <!-- ``` -->
-  
                
 ```{r setup, include=FALSE, eval = T}
 knitr::opts_chunk$set(
