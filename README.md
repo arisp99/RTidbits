@@ -99,7 +99,7 @@ The package [`hexSticker`](https://github.com/GuangchuangYu/hexSticker)
 is very neat for making logos. An example is provided below:
 
 ``` r
-hexSticker::sticker("~/Desktop/wisdom.jpg", package = "RTidbits", filename = "~/Desktop/logo.png", 
+hexSticker::sticker("logo_background.jpg", package = "RTidbits", filename = "logo.png", 
     s_x = 0.96, s_y = 0.9, s_width = 1.4, p_size = 6.5, p_x = 1, p_y = 1.6, p_color = "#ed7980", 
     h_color = "#f6ca32", h_fill = "#18478c", white_around_sticker = T)
 ```
