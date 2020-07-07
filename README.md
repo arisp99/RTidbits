@@ -3,21 +3,15 @@ RTidbits
 ================
 
   - [Package Development](#package-development)
-      - [Important Commands](#important-commands)
-          - [Package Creation](#package-creation)
-          - [CI and Testing](#ci-and-testing)
-      - [Websites](#websites)
-  - [Badges](#badges)
-      - [Commands](#commands)
-  - [Logos](#logos)
+      - [Package Creation](#package-creation)
+      - [CI and Testing](#ci-and-testing)
+      - [Useful Websites](#useful-websites)
+      - [Badges](#badges)
+      - [Logos](#logos)
   - [R Markdown](#r-markdown)
-      - [Websites](#websites-1)
-  - [Example Yaml Headers](#example-yaml-headers)
-      - [HTML](#html)
-      - [PrettyDoc](#prettydoc)
-      - [PDF](#pdf)
-      - [Multiple Outputs](#multiple-outputs)
-  - [Figures](#figures)
+      - [Useful Websites](#useful-websites-1)
+      - [Yaml Headers](#yaml-headers)
+      - [Figures](#figures)
   - [Misc](#misc)
 
 <!-- Code for Website -->
@@ -34,9 +28,7 @@ RTidbits
 
 # Package Development
 
-## Important Commands
-
-### Package Creation
+## Package Creation
 
 ``` r
 usethis::create_package()
@@ -48,7 +40,7 @@ usethis::use_pipe()
 usethis::use_lifecycle_badge("Experimental")
 ```
 
-### CI and Testing
+## CI and Testing
 
 ``` r
 usethis::use_travis()
@@ -59,7 +51,7 @@ usethis::use_github_actions()
 usethis::use_github_action("check-standard")
 ```
 
-## Websites
+## Useful Websites
 
 The following list of sites are particularly handy in package
 development:
@@ -70,7 +62,7 @@ development:
   - [Devtools Reference
     Page](https://devtools.r-lib.org/reference/index.html)
 
-# Badges
+## Badges
 
 Badges are written in R Markdown with the following structure:
 
@@ -94,7 +86,7 @@ MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.or
 The package [`badger`](https://github.com/GuangchuangYu/badger) has a
 nice list of badges that can be added.
 
-## Commands
+Below are several useful functions to automatically add badges.
 
 ``` r
 usethis::use_lifecycle_badge()
@@ -102,7 +94,7 @@ usethis::use_travis_badge()
 usethis::use_github_actions_badge()
 ```
 
-# Logos
+## Logos
 
 The package [`hexSticker`](https://github.com/GuangchuangYu/hexSticker)
 is very neat for making logos. An example is provided below:
@@ -125,18 +117,18 @@ usethis::use_logo("~/Desktop/logo.png")
 
 # R Markdown
 
-## Websites
+## Useful Websites
 
   - [R Markdown Book](https://bookdown.org/yihui/rmarkdown/)
   - [R Markdown Cheat
     Sheet](https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
-  - [Hadley
+  - [R For Data Science
     Chapter](https://r4ds.had.co.nz/r-markdown.html#introduction-18)
   - [Knitr Options](https://yihui.org/knitr/options/)
 
-# Example Yaml Headers
+## Yaml Headers
 
-## HTML
+HTML
 
 ``` yaml
 ---
@@ -148,7 +140,7 @@ html_document:
 ---
 ```
 
-## PrettyDoc
+PrettyDoc
 
 ``` yaml
 ---
@@ -160,7 +152,7 @@ prettydoc::html_pretty:
 ---
 ```
 
-## PDF
+PDF
 
 ``` yaml
 ---
@@ -171,9 +163,7 @@ pdf_document:
 ---
 ```
 
-## Multiple Outputs
-
-In order to specifiy multiple outputs, it is as easy as just having both
+In order to specify multiple outputs, it is as easy as just having both
 the html and pdf code above, for example. If however, specific
 instructions are not given for one of the outputs, the user must include
 `output_type: default`.
@@ -186,7 +176,7 @@ once, the following must be used
 rmarkdown::render("path/to/markdown", output_format = "all")
 ```
 
-# Figures
+## Figures
 
 Figures can be included using the [`knitr`](https://yihui.org/knitr/)
 package
@@ -200,6 +190,39 @@ png file.
 
 # Misc
 
-In order to ensure that documentation is being built with roxygen2, Go
-to Tools -\> Project Options -\> Build Tools and check the box that says
-“generate documentation with roxygen”
+  - In order to ensure that documentation is being built with roxygen2,
+    Go to Tools -\> Project Options -\> Build Tools and check the box
+    that says “generate documentation with roxygen”
+
+  - There are two progress bars that I have found to be useful and easy
+    to work with: [`pbapply`](https://github.com/psolymos/pbapply) and
+    [`progress`](https://github.com/r-lib/progress).
+    
+    The following in some code that checks whether `pbapply` is
+    installed. If it is, it will use a progress bar for a `lapply`,
+    otherwise, it will use the standard `lapply`.
+    
+    ``` r
+    # Function to determine if pbapply is installed. If it is installed, it will
+    # display a progress bar
+    list_apply <- function(x, fun, ...) {
+        if (requireNamespace("pbapply", quietly = TRUE)) {
+            pbapply::pblapply(x, fun, ...)
+        } else {
+            lapply(x, fun, ...)
+        }
+    }
+    ```
+    
+    Using `progress` is a little more complicated. It utilizes the
+    functions `pb$new` and `pb$tick`. An example is below:
+    
+    ``` r
+    pb <- progress::progress_bar$new(format = "working on it [:bar] :percent eta :eta", 
+        complete = "+", clear = F, total = length(tt), width = 60)
+    
+    try <- lapply(tt, function(x) {
+        pb$tick()
+        tibble::as_tibble(x)
+    })
+    ```
