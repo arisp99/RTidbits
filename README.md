@@ -12,6 +12,9 @@ RTidbits
       - [Useful Websites](#useful-websites-1)
       - [Yaml Headers](#yaml-headers)
       - [Figures](#figures)
+  - [ggplot2](#ggplot2)
+      - [Useful Packages and Websites](#useful-packages-and-websites)
+      - [Options](#options)
   - [Misc](#misc)
 
 <!-- Code for Website -->
@@ -57,9 +60,9 @@ The following list of sites are particularly handy in package
 development:
 
   - [R Packages](http://r-pkgs.had.co.nz/)
-  - [Usethis Reference
+  - [usethis Reference
     Page](https://usethis.r-lib.org/reference/index.html)
-  - [Devtools Reference
+  - [devtools Reference
     Page](https://devtools.r-lib.org/reference/index.html)
 
 ## Badges
@@ -187,6 +190,44 @@ knitr::include_graphics("path/to/image")
 
 Note that html documents will not accept pdf files; the image must be a
 png file.
+
+# ggplot2
+
+## Useful Packages and Websites
+
+  - [ggplot2 Website](https://ggplot2.tidyverse.org/)
+  - [ggpubr](https://github.com/kassambara/ggpubr) is a must have for
+    publishing images
+  - [R Color
+    Palettes](https://www.datanovia.com/en/blog/top-r-color-palettes-to-know-for-great-data-visualization/)
+  - [ggsci](https://github.com/nanxstats/ggsci) has several very nice
+    looking themes
+
+## Options
+
+  - My preferred theme settings can be found below
+    
+    ``` r
+    theme_classic()
+    theme(text = element_text(family = "Times New Roman"), plot.title = element_text(hjust = 0.5, 
+        size = 10), axis.title = element_text(size = 7), legend.position = "bottom", 
+        legend.title = element_text(size = 10), legend.text = element_text(size = 8))
+    labs(x = "", y = "", title = "")
+    ```
+
+  - The legend can be omitted by adding the following `guides(fill =
+    FALSE)`
+
+  - If you try to specify a specific font in a `ggplot2` object, you may
+    get the following error: `Error: font family 'Times New Roman' not
+    found`. In order to get around this, the `extrafont` package can be
+    utilized by running:
+    
+    ``` r
+    # Note that the package must be loaded for this to work
+    library(extrafont)
+    font_import()
+    ```
 
 # Misc
 
