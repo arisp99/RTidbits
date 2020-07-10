@@ -165,19 +165,31 @@ rmarkdown::render("path/to/markdown", output_format = "all")
 ```
 
 ## Figures
-Figures can be included using the [`knitr`](https://yihui.org/knitr/) package
+ * Figures can be included using the [`knitr`](https://yihui.org/knitr/) 
+ package. This technique is neat as it allows you to decide whether the image
+ should be included or not. For example, you could have the options 
+ `eval = include_figures` and in the beginning of your markdown file 
+ define `include_figures` to be `TRUE` or `FALSE`.
 
-```{r example image}
-knitr::include_graphics("path/to/image")
-```
-
-Note that html documents will not accept pdf files; the image must be a png file.
+    ```{r example image}
+    knitr::include_graphics("path/to/image")
+    ``` 
+    Note that html documents will not accept pdf files; the image must be a png 
+    file. 
+  
+  * Another method to including figures is to include the figure as part of the
+  markdown text You can do this with the following:
+    ```markdown
+    ![figure name](path/to/figure.png)
+    ```
 
 # ggplot2
 
 ## Useful Packages and Websites
 
 * [ggplot2 Website](https://ggplot2.tidyverse.org/)
+* [Graph Gallery](https://www.r-graph-gallery.com/index.html) is a beautiful 
+website with tons of awesome graphs and demos
 * [ggpubr](https://github.com/kassambara/ggpubr) is a must have for publishing
 images
 * [R Color Palettes](https://www.datanovia.com/en/blog/top-r-color-palettes-to-know-for-great-data-visualization/)
@@ -186,16 +198,23 @@ themes
 
 ## Options
 * My preferred theme settings can be found below
-  ```{r ggplot options}
-  theme_classic()
-  theme(text = element_text(family = "Times New Roman"),
-        plot.title = element_text(hjust = 0.5, size = 10),
-        axis.title = element_text(size = 7),
-        legend.position = "bottom",
-        legend.title = element_text(size = 10),
-        legend.text = element_text(size = 8))
-  labs(x = "", y = "", title = "")
-  ```
+    ```{r ggplot options}
+    theme_classic()
+    theme(text = element_text(family = "Times New Roman"),
+          plot.title = element_text(hjust = 0.5, size = 10),
+          axis.title = element_text(size = 7),
+          legend.position = "bottom",
+          legend.title = element_text(size = 10),
+          legend.text = element_text(size = 8))
+    labs(x = "", y = "", title = "")
+    ```
+
+* The `viridis` package has a popular and neat color scheme. Colors can be added
+with: `scale_color_viridis()` or `scale_fill_viridis()`. Options include limits
+and breaks as well as the option to change between four main color scales:
+`viridis`, the default, `magma`, `plasma`, and `inferno`.
+
+![Viridis Color Scales](figures/viridis_color_scales.png)
 
 * The legend can be omitted by adding the following `guides(fill = FALSE)`
 
@@ -203,11 +222,11 @@ themes
 following error: `Error: font family 'Times New Roman' not found`. In order to 
 get around this, the `extrafont` package can be utilized by running:
 
-  ```{r}
-  # Note that the package must be loaded for this to work
-  library(extrafont)
-  font_import()
-  ```
+    ```{r}
+    # Note that the package must be loaded for this to work
+    library(extrafont)
+    font_import()
+    ```
 
 # Misc
 
@@ -222,29 +241,29 @@ easy to work with: [`pbapply`](https://github.com/psolymos/pbapply) and
   The following in some code that checks whether `pbapply` is installed. If it is,
 it will use a progress bar for a `lapply`, otherwise, it will use the standard
 `lapply`.
-  ```{r}
-  # Function to determine if pbapply is installed. If it is installed, it will
-  # display a progress bar
-  list_apply <- function(x, fun, ...){
-    if (requireNamespace("pbapply", quietly = TRUE)) {
-      pbapply::pblapply(x, fun, ...)
-      } else {
-      lapply(x, fun, ...)
+    ```{r}
+    # Function to determine if pbapply is installed. If it is installed, it will
+    # display a progress bar
+    list_apply <- function(x, fun, ...){
+      if (requireNamespace("pbapply", quietly = TRUE)) {
+        pbapply::pblapply(x, fun, ...)
+        } else {
+        lapply(x, fun, ...)
+      }
     }
-  }
-  ```
+    ```
   
   Using `progress` is a little more complicated. It utilizes the functions 
   `pb$new` and `pb$tick`. An example is below:
-  ```{r}
-  pb <- progress::progress_bar$new(format = "working on it [:bar] :percent eta :eta",
-                                  complete = "+", clear = F, 
-                                  total = length(tt), width = 60)
-
-  try <- lapply(tt, function(x) {
-    pb$tick()
-    tibble::as_tibble(x)
-    })
-  ```
+    ```{r}
+    pb <- progress::progress_bar$new(format = "working on it [:bar] :percent eta :eta",
+                                     complete = "+", clear = F, 
+                                     total = length(tt), width = 60)
+  
+    try <- lapply(tt, function(x) {
+      pb$tick()
+      tibble::as_tibble(x)
+      })
+    ```
 
 

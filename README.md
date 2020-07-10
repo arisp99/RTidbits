@@ -181,21 +181,34 @@ rmarkdown::render("path/to/markdown", output_format = "all")
 
 ## Figures
 
-Figures can be included using the [`knitr`](https://yihui.org/knitr/)
-package
+  - Figures can be included using the
+    [`knitr`](https://yihui.org/knitr/) package. This technique is neat
+    as it allows you to decide whether the image should be included or
+    not. For example, you could have the options `eval =
+    include_figures` and in the beginning of your markdown file define
+    `include_figures` to be `TRUE` or `FALSE`.
+    
+    ``` r
+    knitr::include_graphics("path/to/image")
+    ```
+    
+    Note that html documents will not accept pdf files; the image must
+    be a png file.
 
-``` r
-knitr::include_graphics("path/to/image")
-```
-
-Note that html documents will not accept pdf files; the image must be a
-png file.
+  - Another method to including figures is to include the figure as part
+    of the markdown text You can do this with the following:
+    
+    ``` markdown
+    ![figure name](path/to/figure.png)
+    ```
 
 # ggplot2
 
 ## Useful Packages and Websites
 
   - [ggplot2 Website](https://ggplot2.tidyverse.org/)
+  - [Graph Gallery](https://www.r-graph-gallery.com/index.html) is a
+    beautiful website with tons of awesome graphs and demos
   - [ggpubr](https://github.com/kassambara/ggpubr) is a must have for
     publishing images
   - [R Color
@@ -214,6 +227,14 @@ png file.
         legend.title = element_text(size = 10), legend.text = element_text(size = 8))
     labs(x = "", y = "", title = "")
     ```
+
+  - The `viridis` package has a popular and neat color scheme. Colors
+    can be added with: `scale_color_viridis()` or
+    `scale_fill_viridis()`. Options include limits and breaks as well as
+    the option to change between four main color scales: `viridis`, the
+    default, `magma`, `plasma`, and `inferno`.
+
+![Viridis Color Scales](figures/viridis_color_scales.png)
 
   - The legend can be omitted by adding the following `guides(fill =
     FALSE)`
