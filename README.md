@@ -215,6 +215,8 @@ rmarkdown::render("path/to/markdown", output_format = "all")
     Palettes](https://www.datanovia.com/en/blog/top-r-color-palettes-to-know-for-great-data-visualization/)
   - [ggsci](https://github.com/nanxstats/ggsci) has several very nice
     looking themes
+  - [In depth ggplot2
+    tutorial](http://r-statistics.co/ggplot2-Tutorial-With-R.html)
 
 ## Options
 
