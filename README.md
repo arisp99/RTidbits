@@ -7,7 +7,6 @@ RTidbits
       - [CI and Testing](#ci-and-testing)
       - [Useful Websites](#useful-websites)
       - [Badges](#badges)
-      - [Logos](#logos)
   - [R Markdown](#r-markdown)
       - [Useful Websites](#useful-websites-1)
       - [Yaml Headers](#yaml-headers)
@@ -15,6 +14,7 @@ RTidbits
   - [ggplot2](#ggplot2)
       - [Useful Packages and Websites](#useful-packages-and-websites)
       - [Options](#options)
+      - [Other Info](#other-info)
   - [Misc](#misc)
 
 <!-- Code for Website -->
@@ -29,9 +29,9 @@ RTidbits
 
 <!-- ``` -->
 
-# Package Development
+## Package Development
 
-## Package Creation
+### Package Creation
 
 ``` r
 usethis::create_package()
@@ -43,18 +43,18 @@ usethis::use_pipe()
 usethis::use_lifecycle_badge("Experimental")
 ```
 
-## CI and Testing
+### CI and Testing
 
 ``` r
 usethis::use_travis()
 usethis::use_testthat()
 usethis::use_github_actions()
 
-## Note can add more specific actions using
+# Note can add more specific actions using
 usethis::use_github_action("check-standard")
 ```
 
-## Useful Websites
+### Useful Websites
 
 The following list of sites are particularly handy in package
 development:
@@ -65,7 +65,7 @@ development:
   - [devtools Reference
     Page](https://devtools.r-lib.org/reference/index.html)
 
-## Badges
+### Badges
 
 Badges are written in R Markdown with the following structure:
 
@@ -97,15 +97,18 @@ usethis::use_travis_badge()
 usethis::use_github_actions_badge()
 ```
 
-## Logos
+\#\#\#Logos
 
 The package [`hexSticker`](https://github.com/GuangchuangYu/hexSticker)
 is very neat for making logos. An example is provided below:
 
 ``` r
-hexSticker::sticker("logo_background.jpg", package = "RTidbits", filename = "logo.png", 
-    s_x = 0.96, s_y = 0.9, s_width = 1.4, p_size = 6.5, p_x = 1, p_y = 1.6, p_color = "#ed7980", 
-    h_color = "#f6ca32", h_fill = "#18478c", white_around_sticker = T)
+hexSticker::sticker("logo_background.jpg", package = "RTidbits", 
+                    filename = "logo.png", 
+                    s_x = 0.96, s_y = 0.9, s_width = 1.4,
+                    p_size = 6.5, p_x = 1, p_y = 1.6, p_color = "#ed7980",
+                    h_color = "#f6ca32", h_fill = "#18478c", 
+                    white_around_sticker = T)
 ```
 
 The website [TinEye](https://labs.tineye.com/color/) may also come in
@@ -118,9 +121,9 @@ following may come in handy
 usethis::use_logo("~/Desktop/logo.png")
 ```
 
-# R Markdown
+## R Markdown
 
-## Useful Websites
+### Useful Websites
 
   - [R Markdown Book](https://bookdown.org/yihui/rmarkdown/)
   - [R Markdown Cheat
@@ -129,7 +132,7 @@ usethis::use_logo("~/Desktop/logo.png")
     Chapter](https://r4ds.had.co.nz/r-markdown.html#introduction-18)
   - [Knitr Options](https://yihui.org/knitr/options/)
 
-## Yaml Headers
+### Yaml Headers
 
 HTML
 
@@ -179,7 +182,7 @@ once, the following must be used
 rmarkdown::render("path/to/markdown", output_format = "all")
 ```
 
-## Figures
+### Figures
 
   - Figures can be included using the
     [`knitr`](https://yihui.org/knitr/) package. This technique is neat
@@ -202,9 +205,14 @@ rmarkdown::render("path/to/markdown", output_format = "all")
     ![figure name](path/to/figure.png)
     ```
 
-# ggplot2
+  - Often you may need to rescale or adjust the size of the image. The
+    important chunk options are `fig.width` and `fig.height`. For more
+    details, see this [useful
+    guide](http://zevross.com/blog/2017/06/19/tips-and-tricks-for-working-with-images-and-figures-in-r-markdown-documents/).
 
-## Useful Packages and Websites
+## ggplot2
+
+### Useful Packages and Websites
 
   - [ggplot2 Website](https://ggplot2.tidyverse.org/)
   - [Graph Gallery](https://www.r-graph-gallery.com/index.html) is a
@@ -218,41 +226,53 @@ rmarkdown::render("path/to/markdown", output_format = "all")
   - [In depth ggplot2
     tutorial](http://r-statistics.co/ggplot2-Tutorial-With-R.html)
 
-## Options
+### Options
 
   - My preferred theme settings can be found below
     
     ``` r
-    theme_classic()
-    theme(text = element_text(family = "Times New Roman"), plot.title = element_text(hjust = 0.5, 
-        size = 10), axis.title = element_text(size = 7), legend.position = "bottom", 
-        legend.title = element_text(size = 10), legend.text = element_text(size = 8))
+    theme_classic() +
+    theme(text = element_text(family = "Times New Roman"),
+          plot.title = element_text(hjust = 0.5, size = 10),
+          axis.title = element_text(size = 7),
+          legend.position = "bottom",
+          legend.title = element_text(size = 10),
+          legend.text = element_text(size = 8)) +
     labs(x = "", y = "", title = "")
     ```
-
-  - The `viridis` package has a popular and neat color scheme. Colors
-    can be added with: `scale_color_viridis()` or
-    `scale_fill_viridis()`. Options include limits and breaks as well as
-    the option to change between four main color scales: `viridis`, the
-    default, `magma`, `plasma`, and `inferno`.
-
-![Viridis Color Scales](figures/viridis_color_scales.png)
 
   - The legend can be omitted by adding the following `guides(fill =
     FALSE)`
 
+### Other Info
+
+  - The `viridis` package has a popular and neat color scheme. Colors
+    can be added using the `ggplot2` functions:
+    `scale_colour_viridis_d()` and `scale_fill_viridis_d()`. `_d` is
+    used for discrete, data `_c` is used for continuous data, and `_b`
+    is used to give continuous data breaks. See more on the function’s
+    [help
+    page](https://ggplot2.tidyverse.org/reference/scale_viridis.html).
+    Options include limits and breaks as well as the option to change
+    between four main color scales: `viridis`, `magma`, `plasma`, and
+    `inferno`.
+
+![Viridis Color Scales](figures/viridis_color_scales.png)
+
   - If you try to specify a specific font in a `ggplot2` object, you may
-    get the following error: `Error: font family 'Times New Roman' not
-    found`. In order to get around this, the `extrafont` package can be
-    utilized by running:
+    get the following error: `Error: font family '<FONT>' not found`. In
+    order to get around this, the `extrafont` package can be utilized by
+    running:
     
     ``` r
-    # Note that the package must be loaded for this to work
-    library(extrafont)
-    font_import()
+    extrafont::font_import()
     ```
 
-# Misc
+  - The [`plotly`](https://plotly.com/r/) package can be used to make
+    interactive graphs. To convert `ggplot2` graphs into interactive
+    graphs, the function `ggplotly()` is used.
+
+## Misc
 
   - In order to ensure that documentation is being built with roxygen2,
     Go to Tools -\> Project Options -\> Build Tools and check the box
@@ -269,12 +289,12 @@ rmarkdown::render("path/to/markdown", output_format = "all")
     ``` r
     # Function to determine if pbapply is installed. If it is installed, it will
     # display a progress bar
-    list_apply <- function(x, fun, ...) {
-        if (requireNamespace("pbapply", quietly = TRUE)) {
-            pbapply::pblapply(x, fun, ...)
+    list_apply <- function(x, fun, ...){
+      if (requireNamespace("pbapply", quietly = TRUE)) {
+        pbapply::pblapply(x, fun, ...)
         } else {
-            lapply(x, fun, ...)
-        }
+        lapply(x, fun, ...)
+      }
     }
     ```
     
@@ -282,11 +302,12 @@ rmarkdown::render("path/to/markdown", output_format = "all")
     functions `pb$new` and `pb$tick`. An example is below:
     
     ``` r
-    pb <- progress::progress_bar$new(format = "working on it [:bar] :percent eta :eta", 
-        complete = "+", clear = F, total = length(tt), width = 60)
+    pb <- progress::progress_bar$new(format = "working on it [:bar] :percent eta :eta",
+                                     complete = "+", clear = F, 
+                                     total = length(tt), width = 60)
     
     try <- lapply(tt, function(x) {
-        pb$tick()
-        tibble::as_tibble(x)
-    })
+      pb$tick()
+      tibble::as_tibble(x)
+      })
     ```
