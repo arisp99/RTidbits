@@ -59,7 +59,8 @@ usethis::use_github_action("check-standard")
 The following list of sites are particularly handy in package
 development:
 
-  - [R Packages](http://r-pkgs.had.co.nz/)
+  - [R Packages 1<sup>st</sup> ed.](http://r-pkgs.had.co.nz/)
+  - [R Packages 2<sup>nd</sup> ed.](https://r-pkgs.org/)
   - [usethis Reference
     Page](https://usethis.r-lib.org/reference/index.html)
   - [devtools Reference
@@ -163,6 +164,7 @@ PDF
 ``` yaml
 ---
 pdf_document:
+  highlight: pygments
   toc: true
   toc_depth: 2
   number_sections: true
