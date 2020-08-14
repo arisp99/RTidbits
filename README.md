@@ -7,6 +7,7 @@ RTidbits
       - [CI and Testing](#ci-and-testing)
       - [Useful Websites](#useful-websites)
       - [Badges](#badges)
+      - [Logos](#logos)
   - [R Markdown](#r-markdown)
       - [Useful Websites](#useful-websites-1)
       - [Yaml Headers](#yaml-headers)
@@ -98,7 +99,7 @@ usethis::use_travis_badge()
 usethis::use_github_actions_badge()
 ```
 
-\#\#\#Logos
+### Logos
 
 The package [`hexSticker`](https://github.com/GuangchuangYu/hexSticker)
 is very neat for making logos. An example is provided below:
@@ -121,6 +122,8 @@ following may come in handy
 ``` r
 usethis::use_logo("~/Desktop/logo.png")
 ```
+
+<a href="#top">Back to the top</a>
 
 ## R Markdown
 
@@ -212,6 +215,8 @@ rmarkdown::render("path/to/markdown", output_format = "all")
     details, see this [useful
     guide](http://zevross.com/blog/2017/06/19/tips-and-tricks-for-working-with-images-and-figures-in-r-markdown-documents/).
 
+<a href="#top">Back to the top</a>
+
 ## ggplot2
 
 ### Useful Packages and Websites
@@ -274,6 +279,8 @@ rmarkdown::render("path/to/markdown", output_format = "all")
     interactive graphs. To convert `ggplot2` graphs into interactive
     graphs, the function `ggplotly()` is used.
 
+<a href="#top">Back to the top</a>
+
 ## Misc
 
   - In order to ensure that documentation is being built with roxygen2,
@@ -313,3 +320,5 @@ rmarkdown::render("path/to/markdown", output_format = "all")
       tibble::as_tibble(x)
       })
     ```
+
+<a href="#top">Back to the top</a>
