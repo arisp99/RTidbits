@@ -28,27 +28,6 @@ knitr::opts_chunk$set(
 
 ## Package Development
 
-### Package Creation
-```{r creation}
-usethis::create_package()
-usethis::use_readme_rmd()
-usethis::use_mit_license("Aris Paschalidis")
-usethis::use_spell_check()
-usethis::use_namespace()
-usethis::use_pipe()
-usethis::use_lifecycle_badge("Experimental")
-```
-
-### CI and Testing
-```{r CI and testing}
-usethis::use_travis()
-usethis::use_testthat()
-usethis::use_github_actions()
-
-# Note can add more specific actions using
-usethis::use_github_action("check-standard")
-```
-
 ### Useful Websites
 
 The following list of sites are particularly handy in package development:
@@ -57,6 +36,78 @@ The following list of sites are particularly handy in package development:
 * [R Packages 2^nd^ ed.](https://r-pkgs.org/)
 * [usethis Reference Page](https://usethis.r-lib.org/reference/index.html)
 * [devtools Reference Page](https://devtools.r-lib.org/reference/index.html)
+
+### Package Creation
+The following will setup a basic package and import the pipe (`%>%`) from 
+`magrittr`.
+```{r creation}
+usethis::create_package()
+usethis::use_package_doc()
+usethis::use_namespace()
+usethis::use_tidy_description()
+usethis::use_pipe()
+usethis::use_news_md()
+```
+
+We can also add a couple more components to the package using the following.
+```{r additional components}
+usethis::use_spell_check()
+usethis::use_readme_rmd()
+usethis::use_mit_license("Aris Paschalidis")
+usethis::use_lifecycle_badge("Experimental")
+```
+
+### CI and Testing
+```{r CI and testing}
+usethis::use_testthat()
+usethis::use_github_actions()
+
+# Note can add more specific actions using
+usethis::use_github_action("check-standard")
+usethis::use_github_action("check-release")
+
+# Adding a badge to the README
+usethis::use_github_action()
+
+# We can also use travis, but we recommend using github actions
+# usethis::use_travis()
+```
+
+### Data
+If we would like our package to have data, we can use the following two
+commands.
+```{r data}
+# Creates the file we use to generate our data
+usethis::use_data_raw()
+
+# Stores our data
+usethis::use_data()
+
+# We can also store internal data
+usethis::use_data(internal = TRUE)
+```
+
+### Github
+```{r github}
+# Setting up github
+usethis::use_github()
+usethis::use_github_labels()
+usethis::use_tidy_issue_template()
+usethis::use_github_links()
+```
+
+#### Pull Requests
+```{r PRs}
+# Create a PR
+usethis::pr_init()
+
+# Push a PR
+usethis::pr_push()
+
+# Finish a PR
+usethis::pr_finish()
+```
+
 
 ### Badges
 

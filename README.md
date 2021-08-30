@@ -2,70 +2,124 @@ RTidbits
 <a href='https://github.com/arisp99/RTidbits'><img src='logo.png' align="right" height="139" /></a>
 ================
 
-  - [Package Development](#package-development)
-      - [Package Creation](#package-creation)
-      - [CI and Testing](#ci-and-testing)
-      - [Useful Websites](#useful-websites)
-      - [Badges](#badges)
-      - [Logos](#logos)
-  - [R Markdown](#r-markdown)
-      - [Useful Websites](#useful-websites-1)
-      - [Yaml Headers](#yaml-headers)
-      - [Figures](#figures)
-  - [ggplot2](#ggplot2)
-      - [Useful Packages and Websites](#useful-packages-and-websites)
-      - [Options](#options)
-      - [Other Info](#other-info)
-  - [Misc](#misc)
+-   [Package Development](#package-development)
+    -   [Useful Websites](#useful-websites)
+    -   [Package Creation](#package-creation)
+    -   [CI and Testing](#ci-and-testing)
+    -   [Data](#data)
+    -   [Github](#github)
+    -   [Badges](#badges)
+    -   [Logos](#logos)
+-   [R Markdown](#r-markdown)
+    -   [Useful Websites](#useful-websites-1)
+    -   [Yaml Headers](#yaml-headers)
+    -   [Figures](#figures)
+-   [ggplot2](#ggplot2)
+    -   [Useful Packages and Websites](#useful-packages-and-websites)
+    -   [Options](#options)
+    -   [Other Info](#other-info)
+-   [Misc](#misc)
 
 <!-- Code for Website -->
-
 <!-- ```{r, echo = F} -->
-
 <!-- htmltools::img(src = knitr::image_uri("logo.png"),  -->
-
 <!--                alt = 'logo',  -->
-
 <!--                style = 'position:absolute; top:0; right:0; height:130px; padding:10px;') -->
-
 <!-- ``` -->
 
 ## Package Development
-
-### Package Creation
-
-``` r
-usethis::create_package()
-usethis::use_readme_rmd()
-usethis::use_mit_license("Aris Paschalidis")
-usethis::use_spell_check()
-usethis::use_namespace()
-usethis::use_pipe()
-usethis::use_lifecycle_badge("Experimental")
-```
-
-### CI and Testing
-
-``` r
-usethis::use_travis()
-usethis::use_testthat()
-usethis::use_github_actions()
-
-# Note can add more specific actions using
-usethis::use_github_action("check-standard")
-```
 
 ### Useful Websites
 
 The following list of sites are particularly handy in package
 development:
 
-  - [R Packages 1<sup>st</sup> ed.](http://r-pkgs.had.co.nz/)
-  - [R Packages 2<sup>nd</sup> ed.](https://r-pkgs.org/)
-  - [usethis Reference
+-   [R Packages 1<sup>st</sup> ed.](http://r-pkgs.had.co.nz/)
+-   [R Packages 2<sup>nd</sup> ed.](https://r-pkgs.org/)
+-   [usethis Reference
     Page](https://usethis.r-lib.org/reference/index.html)
-  - [devtools Reference
+-   [devtools Reference
     Page](https://devtools.r-lib.org/reference/index.html)
+
+### Package Creation
+
+The following will setup a basic package and import the pipe (`%>%`)
+from `magrittr`.
+
+``` r
+usethis::create_package()
+usethis::use_package_doc()
+usethis::use_namespace()
+usethis::use_tidy_description()
+usethis::use_pipe()
+usethis::use_news_md()
+```
+
+We can also add a couple more components to the package using the
+following.
+
+``` r
+usethis::use_spell_check()
+usethis::use_readme_rmd()
+usethis::use_mit_license("Aris Paschalidis")
+usethis::use_lifecycle_badge("Experimental")
+```
+
+### CI and Testing
+
+``` r
+usethis::use_testthat()
+usethis::use_github_actions()
+
+# Note can add more specific actions using
+usethis::use_github_action("check-standard")
+usethis::use_github_action("check-release")
+
+# Adding a badge to the README
+usethis::use_github_action()
+
+# We can also use travis, but we recommend using github actions
+# usethis::use_travis()
+```
+
+### Data
+
+If we would like our package to have data, we can use the following two
+commands.
+
+``` r
+# Creates the file we use to generate our data
+usethis::use_data_raw()
+
+# Stores our data
+usethis::use_data()
+
+# We can also store internal data
+usethis::use_data(internal = TRUE)
+```
+
+### Github
+
+``` r
+# Setting up github
+usethis::use_github()
+usethis::use_github_labels()
+usethis::use_tidy_issue_template()
+usethis::use_github_links()
+```
+
+#### Pull Requests
+
+``` r
+# Create a PR
+usethis::pr_init()
+
+# Push a PR
+usethis::pr_push()
+
+# Finish a PR
+usethis::pr_finish()
+```
 
 ### Badges
 
@@ -129,12 +183,12 @@ usethis::use_logo("~/Desktop/logo.png")
 
 ### Useful Websites
 
-  - [R Markdown Book](https://bookdown.org/yihui/rmarkdown/)
-  - [R Markdown Cheat
+-   [R Markdown Book](https://bookdown.org/yihui/rmarkdown/)
+-   [R Markdown Cheat
     Sheet](https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
-  - [R For Data Science
+-   [R For Data Science
     Chapter](https://r4ds.had.co.nz/r-markdown.html#introduction-18)
-  - [Knitr Options](https://yihui.org/knitr/options/)
+-   [Knitr Options](https://yihui.org/knitr/options/)
 
 ### Yaml Headers
 
@@ -189,28 +243,25 @@ rmarkdown::render("path/to/markdown", output_format = "all")
 
 ### Figures
 
-  - Figures can be included using the
+-   Figures can be included using the
     [`knitr`](https://yihui.org/knitr/) package. This technique is neat
     as it allows you to decide whether the image should be included or
-    not. For example, you could have the options `eval =
-    include_figures` and in the beginning of your markdown file define
-    `include_figures` to be `TRUE` or `FALSE`.
-    
+    not. For example, you could have the options
+    `eval = include_figures` and in the beginning of your markdown file
+    define `include_figures` to be `TRUE` or `FALSE`.
+
     ``` r
     knitr::include_graphics("path/to/image")
     ```
-    
+
     Note that html documents will not accept pdf files; the image must
     be a png file.
 
-  - Another method to including figures is to include the figure as part
+-   Another method to including figures is to include the figure as part
     of the markdown text You can do this with the following:
-    
-    ``` markdown
-    ![figure name](path/to/figure.png)
-    ```
+    `markdown     ![figure name](path/to/figure.png)`
 
-  - Often you may need to rescale or adjust the size of the image. The
+-   Often you may need to rescale or adjust the size of the image. The
     important chunk options are `fig.width` and `fig.height`. For more
     details, see this [useful
     guide](http://zevross.com/blog/2017/06/19/tips-and-tricks-for-working-with-images-and-figures-in-r-markdown-documents/).
@@ -221,22 +272,22 @@ rmarkdown::render("path/to/markdown", output_format = "all")
 
 ### Useful Packages and Websites
 
-  - [ggplot2 Website](https://ggplot2.tidyverse.org/)
-  - [Graph Gallery](https://www.r-graph-gallery.com/index.html) is a
+-   [ggplot2 Website](https://ggplot2.tidyverse.org/)
+-   [Graph Gallery](https://www.r-graph-gallery.com/index.html) is a
     beautiful website with tons of awesome graphs and demos
-  - [ggpubr](https://github.com/kassambara/ggpubr) is a must have for
+-   [ggpubr](https://github.com/kassambara/ggpubr) is a must have for
     publishing images
-  - [R Color
+-   [R Color
     Palettes](https://www.datanovia.com/en/blog/top-r-color-palettes-to-know-for-great-data-visualization/)
-  - [ggsci](https://github.com/nanxstats/ggsci) has several very nice
+-   [ggsci](https://github.com/nanxstats/ggsci) has several very nice
     looking themes
-  - [In depth ggplot2
+-   [In depth ggplot2
     tutorial](http://r-statistics.co/ggplot2-Tutorial-With-R.html)
 
 ### Options
 
-  - My preferred theme settings can be found below
-    
+-   My preferred theme settings can be found below
+
     ``` r
     theme_classic() +
     theme(text = element_text(family = "Times New Roman"),
@@ -248,12 +299,12 @@ rmarkdown::render("path/to/markdown", output_format = "all")
     labs(x = "", y = "", title = "")
     ```
 
-  - The legend can be omitted by adding the following `guides(fill =
-    FALSE)`
+-   The legend can be omitted by adding the following
+    `guides(fill = FALSE)`
 
 ### Other Info
 
-  - The `viridis` package has a popular and neat color scheme. Colors
+-   The `viridis` package has a popular and neat color scheme. Colors
     can be added using the `ggplot2` functions:
     `scale_colour_viridis_d()` and `scale_fill_viridis_d()`. `_d` is
     used for discrete, data `_c` is used for continuous data, and `_b`
@@ -266,16 +317,16 @@ rmarkdown::render("path/to/markdown", output_format = "all")
 
 ![Viridis Color Scales](figures/viridis_color_scales.png)
 
-  - If you try to specify a specific font in a `ggplot2` object, you may
+-   If you try to specify a specific font in a `ggplot2` object, you may
     get the following error: `Error: font family '<FONT>' not found`. In
     order to get around this, the `extrafont` package can be utilized by
     running:
-    
+
     ``` r
     extrafont::font_import()
     ```
 
-  - The [`plotly`](https://plotly.com/r/) package can be used to make
+-   The [`plotly`](https://plotly.com/r/) package can be used to make
     interactive graphs. To convert `ggplot2` graphs into interactive
     graphs, the function `ggplotly()` is used.
 
@@ -283,18 +334,18 @@ rmarkdown::render("path/to/markdown", output_format = "all")
 
 ## Misc
 
-  - In order to ensure that documentation is being built with roxygen2,
-    Go to Tools -\> Project Options -\> Build Tools and check the box
-    that says “generate documentation with roxygen”
+-   In order to ensure that documentation is being built with roxygen2,
+    Go to Tools -&gt; Project Options -&gt; Build Tools and check the
+    box that says “generate documentation with roxygen”
 
-  - There are two progress bars that I have found to be useful and easy
+-   There are two progress bars that I have found to be useful and easy
     to work with: [`pbapply`](https://github.com/psolymos/pbapply) and
     [`progress`](https://github.com/r-lib/progress).
-    
+
     The following in some code that checks whether `pbapply` is
     installed. If it is, it will use a progress bar for a `lapply`,
     otherwise, it will use the standard `lapply`.
-    
+
     ``` r
     # Function to determine if pbapply is installed. If it is installed, it will
     # display a progress bar
@@ -306,15 +357,15 @@ rmarkdown::render("path/to/markdown", output_format = "all")
       }
     }
     ```
-    
+
     Using `progress` is a little more complicated. It utilizes the
     functions `pb$new` and `pb$tick`. An example is below:
-    
+
     ``` r
     pb <- progress::progress_bar$new(format = "working on it [:bar] :percent eta :eta",
                                      complete = "+", clear = F, 
                                      total = length(tt), width = 60)
-    
+
     try <- lapply(tt, function(x) {
       pb$tick()
       tibble::as_tibble(x)
